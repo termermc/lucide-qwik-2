@@ -39,3 +39,4 @@ lerna-debug.log*
 
 # Project related
 /src/*Icon.tsx
+/src/index.ts
