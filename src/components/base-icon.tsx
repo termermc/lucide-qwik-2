@@ -1,25 +1,31 @@
-import { component$, Slot } from "@builder.io/qwik";
+import { component$, Slot } from '@qwik.dev/core'
 
-import { BaseIconProps } from "../icon-props";
-import fallbackProps from "../default-props";
+import { BaseIconProps } from '../icon-props'
+import { fallbackProps } from '../default-props'
 
-export default component$(({
-  name,
-  size = fallbackProps.size,
-  color = fallbackProps.color,
-  strokeWidth = fallbackProps.strokeWidth,
-  strokeLinecap = fallbackProps.strokeLinecap,
-  strokeLinejoin = fallbackProps.strokeLinejoin,
-  ...restProps
-}: BaseIconProps) => {
-  return <svg
-    {...restProps}
-    xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'
-    width={size} height={size}
-    stroke={color} stroke-width={strokeWidth}
-    stroke-linecap={strokeLinecap} stroke-linejoin={strokeLinejoin}
-    class={`lucide lucide-${name} ${restProps.class ?? ''}`}
-  >
-    <Slot/>
-  </svg>;
-});
+export default component$((props: BaseIconProps) => {
+	return (
+		<svg
+			{...props}
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 24 24"
+			fill="none"
+			width={props.size ?? fallbackProps.size}
+			height={props.size ?? fallbackProps.size}
+			stroke={props.stroke ?? props.color ?? fallbackProps.stroke}
+			color={undefined}
+			stroke-width={
+				props['stroke-width'] ?? fallbackProps['stroke-width']
+			}
+			stroke-linecap={
+				props['stroke-linecap'] ?? fallbackProps['stroke-linecap']
+			}
+			stroke-linejoin={
+				props['stroke-linejoin'] ?? fallbackProps['stroke-linejoin']
+			}
+			class={`lucide lucide-${props.name} ${props.class ?? ''}`}
+		>
+			<Slot />
+		</svg>
+	)
+})

@@ -1,9 +1,9 @@
-import { IconProps } from "./icon-props";
+import { IconProps } from './icon-props'
 
-export default {
-  size: 24,
-  color: 'currentColor',
-  strokeWidth: 2,
-  strokeLinecap: 'round',
-  strokeLinejoin: 'round'
-} as Required<IconProps>;
+export const fallbackProps: IconProps = {
+	size: 24,
+	color: 'currentColor',
+	'stroke-width': 2,
+	'stroke-linecap': 'round',
+	'stroke-linejoin': 'round',
+}

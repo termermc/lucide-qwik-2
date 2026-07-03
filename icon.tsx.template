@@ -1,11 +1,20 @@
-import { component$, Slot } from "@builder.io/qwik";
+import { component$, Slot } from '@qwik.dev/core'
 
-import { IconProps } from "{{TYPES_REL_PATH}}";
-import BaseIcon from "{{BASE_ICON_REL_PATH}}";
+import { IconProps } from '{{TYPES_REL_PATH}}'
+import BaseIcon from '{{BASE_ICON_REL_PATH}}'
 
-export default component$((props: IconProps) => {
-  return <BaseIcon name="{{ICON_NAME}}" {...props}>
-    <Slot/>
-    {{CONTENT}}
-  </BaseIcon>;
-});
+/**
+ * Lucide icon: {{ICON_NAME}}
+ *
+ * Preview: ![img]({{ICON_PREVIEW_URL}})
+ *
+ * @public
+ */
+export const {{ICON_NAME}}Icon = component$((props: IconProps) => {
+	return <BaseIcon name='{{ICON_NAME}}' {...props}>
+		<Slot/>
+		{{CONTENT}}
+	</BaseIcon>
+})
+
+export default {{ICON_NAME}}Icon
