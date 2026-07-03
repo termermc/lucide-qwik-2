@@ -72,7 +72,7 @@ function buildIcon(typesRelPath: string, baseIconRelPath: string) {
 }
 
 function buildExportLine(name: string, iconsRelPath: string) {
-	return `export { default as ${name}Icon } from '${iconsRelPath}${name}Icon'\n`
+	return `export { ${name}Icon } from '${iconsRelPath}${name}Icon'\n`
 }
 
 export async function buildIcons(): Promise<void> {
@@ -84,7 +84,7 @@ export async function buildIcons(): Promise<void> {
 		}
 	}
 
-	// build icons
+	// Build icons.
 	const build = buildIcon('./icon-props', './base-icon')
 
 	await mkdir(iconsPath, { recursive: true })
@@ -98,7 +98,7 @@ export async function buildIcons(): Promise<void> {
 		}),
 	)
 
-	// export icons
+	// Export icons.
 	const indexFile = createWriteStream('./src/index.ts', 'utf8')
 	for (const k of Object.keys(icons)) {
 		indexFile.write(buildExportLine(k, './'))

@@ -46,5 +46,5 @@ console.log('Building with Qwik...')
 await cmd('npx', ['qwik', 'build'])
 
 // Wipe dummy modules used to make Vite produce icon modules.
-await writeFile(join(root, 'lib/index.js'), '')
-await writeFile(join(root, 'lib-types/index.d.ts'), '')
+await writeFile(join(root, 'lib/index.js'), 'export default {}')
+await writeFile(join(root, 'lib-types/index.d.ts'), 'export default {}')
