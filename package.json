@@ -38,8 +38,8 @@
 	"private": false,
 	"type": "module",
 	"scripts": {
-		"build": "qwik build",
-		"build.icons": "node --trace-warnings build.ts",
+		"build": "npm run build.icons && npm run build.lib && npm run build.types && qwik build",
+		"build.icons": "node ./script/build-icons.ts",
 		"build.lib": "vite build --mode lib",
 		"build.types": "tsc --emitDeclarationOnly",
 		"dev": "vite --mode ssr",
@@ -47,7 +47,7 @@
 		"fmt": "prettier --write .",
 		"fmt.check": "prettier --check .",
 		"lint": "eslint \"src/**/*.ts*\"",
-		"release": "np",
+		"release": "npm run build && np",
 		"start": "vite --open --mode ssr",
 		"qwik": "qwik",
 		"test": "echo no tests for now"

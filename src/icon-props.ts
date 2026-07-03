@@ -1,5 +1,8 @@
 import type { QwikIntrinsicElements, SVGAttributes } from '@qwik.dev/core'
 
+/**
+ * Props used for Lucide icon components.
+ */
 export type IconProps = {
 	/**
 	 * The size of the icon.

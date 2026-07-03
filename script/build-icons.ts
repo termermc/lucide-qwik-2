@@ -1,7 +1,11 @@
-import { mkdir, rm, writeFile } from 'node:fs/promises'
-import { createWriteStream, readFileSync } from 'node:fs'
+import { mkdir, rm, writeFile, readFile, } from 'node:fs/promises'
+import { createWriteStream } from 'node:fs'
 
 import lucide from 'lucide'
+import { join, resolve } from 'node:path'
+
+const rootDir = resolve(join(import.meta.dirname, '..'))
+const templateStr = await readFile(join(rootDir, '/icon.tsx.template'), 'utf8')
 
 // Copy the icons object so that it can be modified.
 // Modules cannot have keys deleted from them.
@@ -44,7 +48,7 @@ function buildContent(nodes: lucide.IconNode) {
 }
 
 function buildIcon(typesRelPath: string, baseIconRelPath: string) {
-	const template = readFileSync('./icon.tsx.template', 'utf8')
+	const template = (templateStr)
 		.replaceAll('{{TYPES_REL_PATH}}', typesRelPath)
 		.replaceAll('{{BASE_ICON_REL_PATH}}', baseIconRelPath)
 
@@ -68,7 +72,7 @@ function buildExportLine(name: string, iconsRelPath: string) {
 	return `export { ${name}Icon } from '${iconsRelPath}${name}'\n`
 }
 
-async function build() {
+async function buildIcons() {
 	const iconsPath = './src/components/icons/'
 	await rm(iconsPath, { recursive: true })
 	await mkdir(iconsPath, { recursive: true })
@@ -95,4 +99,4 @@ async function build() {
 	indexFile.close()
 }
 
-await build()
+await buildIcons()
