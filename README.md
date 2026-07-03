@@ -58,22 +58,18 @@ bun add lucide-qwik-2
 
 #### Include
 
-You can import the icon(s) you need as usual:
-
-```ts
-import { ThumbsUp } from 'lucide-qwik-2'
-```
-
-or import them all at once:
+Each icon lives in its own module to enable fine-grained tree-shaking.
 
 ```tsx
 import * as Icons from 'lucide-qwik-2'
+import ThumbsUpIcon from 'lucide-qwik-2/ThumbsUpIcon'
+import BatteryChargingIcon from 'lucide-qwik-2/BatteryChargingIcon'
 
 export const App = component$(() => {
 	return (
 		<div>
-			<Icons.ThumbsUp size={50} />
-			<Icons.BatteryCharging stroke="red" />
+			<ThumbsUpIcon size={50} />
+			<BatteryChargingIcon stroke="red" />
 		</div>
 	)
 })
