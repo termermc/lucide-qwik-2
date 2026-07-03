@@ -62,8 +62,8 @@ Each icon lives in its own module to enable fine-grained tree-shaking.
 
 ```tsx
 import * as Icons from 'lucide-qwik-2'
-import ThumbsUpIcon from 'lucide-qwik-2/ThumbsUpIcon'
-import BatteryChargingIcon from 'lucide-qwik-2/BatteryChargingIcon'
+import { ThumbsUpIcon } from 'lucide-qwik-2/ThumbsUpIcon'
+import { BatteryChargingIcon } from 'lucide-qwik-2/BatteryChargingIcon'
 
 export const App = component$(() => {
 	return (
