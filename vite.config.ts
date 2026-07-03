@@ -7,8 +7,20 @@ export default defineConfig(() => {
 			target: 'esnext',
 			lib: {
 				entry: './src/index.ts',
-				formats: ['es', 'cjs'],
-				fileName: (format) => `index.qwik.${format === 'es' ? 'mjs' : 'cjs'}`,
+				formats: ['es'],
+				fileName: (format) =>
+					`index.qwik.${format === 'es' ? 'mjs' : 'cjs'}`,
+			},
+			rollupOptions: {
+				output: {
+					preserveModules: true,
+					preserveModulesRoot: 'src',
+					// strongly recommend explicit patterns when preserveModules is on
+					entryFileNames: '[name].js',
+					chunkFileNames: '[name]-[hash].js',
+					assetFileNames: '[name]-[hash][extname]',
+					format: 'es',
+				},
 			},
 		},
 		plugins: [qwikVite()],

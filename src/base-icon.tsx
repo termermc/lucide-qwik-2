@@ -1,7 +1,7 @@
 import { component$, Slot } from '@qwik.dev/core'
 
-import { BaseIconProps } from '../icon-props'
-import { fallbackProps } from '../default-props'
+import { BaseIconProps } from './icon-props'
+import { fallbackProps } from './default-props'
 
 export default component$((props: BaseIconProps) => {
 	return (

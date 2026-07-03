@@ -9,8 +9,9 @@ import BaseIcon from '{{BASE_ICON_REL_PATH}}'
  * Preview: ![img]({{ICON_PREVIEW_URL}})
  *
  * @public
+ * @__PURE__
  */
-export const {{ICON_NAME}}Icon = component$((props: IconProps) => {
+const {{ICON_NAME}}Icon = component$((props: IconProps) => {
 	return <BaseIcon name='{{ICON_NAME}}' {...props}>
 		<Slot/>
 		{{CONTENT}}

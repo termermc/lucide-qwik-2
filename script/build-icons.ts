@@ -1,4 +1,7 @@
-import { mkdir, rm, writeFile, readFile, } from 'node:fs/promises'
+// @ts-check
+/// <reference lib="esnext" />
+
+import { mkdir, rm, writeFile, readFile, readdir } from 'node:fs/promises'
 import { createWriteStream } from 'node:fs'
 
 import lucide from 'lucide'
@@ -48,7 +51,7 @@ function buildContent(nodes: lucide.IconNode) {
 }
 
 function buildIcon(typesRelPath: string, baseIconRelPath: string) {
-	const template = (templateStr)
+	const template = templateStr
 		.replaceAll('{{TYPES_REL_PATH}}', typesRelPath)
 		.replaceAll('{{BASE_ICON_REL_PATH}}', baseIconRelPath)
 
@@ -69,22 +72,26 @@ function buildIcon(typesRelPath: string, baseIconRelPath: string) {
 }
 
 function buildExportLine(name: string, iconsRelPath: string) {
-	return `export { ${name}Icon } from '${iconsRelPath}${name}'\n`
+	return `export { default as ${name}Icon } from '${iconsRelPath}${name}Icon'\n`
 }
 
-async function buildIcons() {
-	const iconsPath = './src/components/icons/'
-	await rm(iconsPath, { recursive: true })
+export async function buildIcons(): Promise<void> {
+	const iconsPath = join(rootDir, './src')
 	await mkdir(iconsPath, { recursive: true })
+	for (const file of await readdir(iconsPath)) {
+		if (file.endsWith('Icon.tsx')) {
+			await rm(join(iconsPath, file))
+		}
+	}
 
 	// build icons
-	const build = buildIcon('../../icon-props', '../base-icon')
+	const build = buildIcon('./icon-props', './base-icon')
 
 	await mkdir(iconsPath, { recursive: true })
 	await Promise.all(
 		Object.entries(icons).map(([name, icon]) => {
 			return writeFile(
-				`${iconsPath}${name}.tsx`,
+				join(iconsPath, `${name}Icon.tsx`),
 				build(icon, name, buildContent(icon)),
 				'utf8',
 			)
@@ -93,10 +100,12 @@ async function buildIcons() {
 
 	// export icons
 	const indexFile = createWriteStream('./src/index.ts', 'utf8')
-	Object.keys(icons).forEach((k) =>
-		indexFile.write(buildExportLine(k, './components/icons/')),
-	)
+	for (const k of Object.keys(icons)) {
+		indexFile.write(buildExportLine(k, './'))
+	}
 	indexFile.close()
 }
 
-await buildIcons()
+if (import.meta.main) {
+	await buildIcons()
+}
