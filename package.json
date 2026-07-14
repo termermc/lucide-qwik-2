@@ -1,6 +1,6 @@
 {
 	"name": "lucide-qwik-2",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "Lucide icon library package for Qwik applications",
 	"author": {
 		"name": "termer",
@@ -25,7 +25,7 @@
 	"exports": {
 		"./*": {
 			"types": "./lib-types/*.d.ts",
-			"import": "./lib/*.js"
+			"import": "./lib/*.qwik.js"
 		}
 	},
 	"files": [
@@ -64,7 +64,7 @@
 		"typescript": "6.0.3",
 		"typescript-eslint": "^8.62.1",
 		"undici": "*",
-		"vite": "8.0.5",
+		"vite": "8.1.4",
 		"vite-tsconfig-paths": "^4.2.1"
 	}
 }
