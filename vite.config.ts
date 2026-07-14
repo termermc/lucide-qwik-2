@@ -11,15 +11,12 @@ export default defineConfig(() => {
 				fileName: (format) =>
 					`index.qwik.${format === 'es' ? 'mjs' : 'cjs'}`,
 			},
-			rollupOptions: {
+			rolldownOptions: {
 				output: {
 					preserveModules: true,
 					preserveModulesRoot: 'src',
-					// strongly recommend explicit patterns when preserveModules is on
-					entryFileNames: '[name].js',
-					chunkFileNames: '[name]-[hash].js',
-					assetFileNames: '[name]-[hash][extname]',
-					format: 'es',
+					entryFileNames: '[name].qwik.js',
+					chunkFileNames: '[name]-[hash].qwik.js',
 				},
 			},
 		},
