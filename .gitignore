@@ -38,5 +38,5 @@ lerna-debug.log*
 !.yarn/releases
 
 # Project related
-/src/*Icon.qwik.tsx
+/src/*Icon.tsx
 /src/index.ts

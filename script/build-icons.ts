@@ -72,14 +72,14 @@ function buildIcon(typesRelPath: string, baseIconRelPath: string) {
 }
 
 function buildExportLine(name: string, iconsRelPath: string) {
-	return `export { ${name}Icon } from '${iconsRelPath}${name}Icon.qwik'\n`
+	return `export { ${name}Icon } from '${iconsRelPath}${name}Icon'\n`
 }
 
 export async function buildIcons(): Promise<void> {
 	const iconsPath = join(rootDir, './src')
 	await mkdir(iconsPath, { recursive: true })
 	for (const file of await readdir(iconsPath)) {
-		if (file.endsWith('Icon.qwik.tsx')) {
+		if (file.endsWith('Icon.tsx')) {
 			await rm(join(iconsPath, file))
 		}
 	}
@@ -91,7 +91,7 @@ export async function buildIcons(): Promise<void> {
 	await Promise.all(
 		Object.entries(icons).map(([name, icon]) => {
 			return writeFile(
-				join(iconsPath, `${name}Icon.qwik.tsx`),
+				join(iconsPath, `${name}Icon.tsx`),
 				build(icon, name, buildContent(icon)),
 				'utf8',
 			)
