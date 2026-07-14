@@ -5,7 +5,7 @@ import { spawn } from 'node:child_process'
 import { join, resolve } from 'node:path'
 // @ts-ignore
 import { buildIcons } from './build-icons.ts'
-import { rm, writeFile } from 'node:fs/promises'
+import { readdir, rm, writeFile, rename } from 'node:fs/promises'
 
 const root = resolve(join(import.meta.dirname, '..'))
 
@@ -46,5 +46,12 @@ console.log('Building with Qwik...')
 await cmd('npx', ['qwik', 'build'])
 
 // Wipe dummy modules used to make Vite produce icon modules.
-await writeFile(join(root, 'lib/index.js'), 'export default {}')
-await writeFile(join(root, 'lib-types/index.d.ts'), 'export default {}')
+await writeFile(join(root, 'lib', 'index.js'), 'export default {}')
+await writeFile(join(root, 'lib-types', 'index.d.ts'), 'export default {}')
+
+// Rename type definitions.
+const typedefs = await readdir(join(root, 'lib-types'))
+for (const typedef of typedefs) {
+	const path = join(root, 'lib-types', typedef)
+	await rename(path, path.replace('.d.ts', '.qwik.d.ts'))
+}
