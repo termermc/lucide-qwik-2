@@ -72,7 +72,7 @@ export const App = component$(() => {
 
 #### Props
 
-Lucide icons all inherit from the `SVGAttributes` type, meaning they accept all props that normal `<svg>` elemenst do.
+Lucide icons all inherit from the `SVGAttributes` type, meaning they accept all props that normal `<svg>` elements do.
 
 Exceptions:
 
