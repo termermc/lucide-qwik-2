@@ -47,10 +47,6 @@ npm install lucide-qwik-2
 ```
 
 ```sh
-yarn add lucide-qwik-2
-```
-
-```sh
 bun add lucide-qwik-2
 ```
 
