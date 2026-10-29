@@ -1,6 +1,6 @@
 {
 	"name": "lucide-qwik-2",
-	"version": "0.0.8",
+	"version": "0.0.9",
 	"description": "Lucide icon library package for Qwik applications",
 	"author": {
 		"name": "termer",
@@ -33,12 +33,13 @@
 		"lib-types"
 	],
 	"engines": {
-		"node": ">=20.0.0"
+		"node": ">=24.0.0"
 	},
 	"private": false,
 	"type": "module",
 	"scripts": {
 		"codegen": "node ./script/build-icons.ts",
+		"check": "tsc --noEmit",
 		"build": "node script/build-all.ts",
 		"build.lib": "vite build --mode lib",
 		"build.types": "tsc --emitDeclarationOnly",
@@ -46,25 +47,19 @@
 		"dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
 		"fmt": "prettier --write .",
 		"fmt.check": "prettier --check .",
-		"lint": "eslint \"src/**/*.ts*\"",
 		"release": "rm -rf lib* && npm run build && np",
 		"start": "vite --open --mode ssr",
 		"qwik": "qwik",
 		"test": "echo no tests for now"
 	},
 	"devDependencies": {
-		"@eslint/js": "^9",
-		"@qwik.dev/core": "2.0.0-beta.37",
-		"@types/node": "^26.1.0",
-		"eslint": "9.32.0",
-		"eslint-plugin-qwik": "2.0.0-beta.37",
-		"lucide": "^1.23.0",
-		"np": "^11.2.1",
-		"prettier": "^3.9.4",
-		"typescript": "6.0.3",
-		"typescript-eslint": "^8.62.1",
-		"undici": "*",
-		"vite": "8.1.4",
-		"vite-tsconfig-paths": "^4.2.1"
+		"@eslint/js": "^10",
+		"@qwik.dev/core": "2.0.0-rc.4",
+		"@types/node": "^26.6.6",
+		"lucide": "^1.64.0",
+		"np": "^12.1.1",
+		"prettier": "^3.9.10",
+		"typescript": "^7.0.2",
+		"vite": "8.3.5"
 	}
 }
