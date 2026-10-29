@@ -16,9 +16,10 @@
 		"incremental": true,
 		"isolatedModules": true,
 		"allowImportingTsExtensions": true,
+		"emitDeclarationOnly": true,
 		"checkJs": true,
 		"types": ["vite/client"],
 		"rootDir": "./src"
 	},
-	"include": ["src"]
+	"include": ["src/**/*"]
 }
