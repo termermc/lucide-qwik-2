@@ -3,13 +3,13 @@
 
 import { spawn } from 'node:child_process'
 import { join, resolve } from 'node:path'
-// @ts-ignore
 import { buildIcons } from './build-icons.ts'
 import { readdir, rm, writeFile, rename } from 'node:fs/promises'
 
 const root = resolve(join(import.meta.dirname, '..'))
 
 async function cmd(bin: string, args: string[]) {
+	console.log('Running command', [bin, ...args])
 	const proc = spawn(bin, args, { stdio: 'inherit', cwd: root })
 	return new Promise<void>((resolve, reject) => {
 		proc.on('exit', (code) => {
@@ -41,9 +41,6 @@ await cmd('tsc', ['--emitDeclarationOnly'])
 
 console.log('Building library...')
 await cmd('npx', ['vite', 'build', '--mode', 'lib'])
-
-console.log('Building with Qwik...')
-await cmd('npx', ['qwik', 'build'])
 
 // Wipe dummy modules used to make Vite produce icon modules.
 await writeFile(join(root, 'lib', 'index.js'), 'export default {}')
